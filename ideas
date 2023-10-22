@@ -16,3 +16,14 @@ https://www.kaggle.com/datasets/chitwanmanchanda/fraudulent-transactions-data/
 -business
     -how to present explainable: make a story with explainable features
     -create graphs from transactions to show an account
+
+-presentation:
+    -slide about universe and galaxy
+    -2 slides about ML: supervised vs unsupervised
+    -1 slide about what an anomaly/outlier is + frame of reference
+    -1 slide about scores, F1 and cofusion matrix
+    -1 slide for z score
+    -1 slide for mod
+    -1 slide for the clustering
+    -1 slide for isolation forest
+    -1 slide for autoencoder

@@ -75,8 +75,7 @@ class StatisticalPlots:
             annot=True,  # show numbers in the cells
             fmt='d',  # show numbers as integers
             cbar=False,  # don't show the color bar
-            cmap='flag',  # customize color map
-            vmax=175  # to get better color contrast
+            cmap='flag'  # customize color map
         )
 
         ax.set_xlabel("Predicted", labelpad=20)
@@ -96,5 +95,8 @@ class StatisticalOutlierDetection:
         return zscores
 
     def zscore_outliers(self, zscores, std_threshold=3):
-        outliers_indices = np.where(zscores > std_threshold)
+        right_outliers = zscores.index[zscores > std_threshold].tolist()
+        left_outliers = zscores.index[zscores < -std_threshold].tolist()
+
+        outliers_indices = left_outliers + right_outliers
         return outliers_indices
