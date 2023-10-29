@@ -19,6 +19,7 @@ https://www.kaggle.com/datasets/chitwanmanchanda/fraudulent-transactions-data/
 
 -presentation:
     -slide about universe and galaxy
+    -slide about how the presentation can help you
     -2 slides about ML: supervised vs unsupervised
     -1 slide about what an anomaly/outlier is + frame of reference
     -1 slide about scores, F1 and cofusion matrix
@@ -27,3 +28,8 @@ https://www.kaggle.com/datasets/chitwanmanchanda/fraudulent-transactions-data/
     -1 slide for the clustering
     -1 slide for isolation forest
     -1 slide for autoencoder
+
+    -audit: 3 types (internal - focus on security/protocols/and alignment with others, independent, national)
+        -assumptions about data
+        -assumptions about model/and why the pick? (is IF making data assumptions, is AE making data assumptions)
+        -explainable?

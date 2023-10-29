@@ -4,6 +4,9 @@ import numpy as np
 import scipy.stats as stats
 import seaborn as sns
 
+from scipy.linalg import inv
+from scipy.stats import chi2
+
 
 class StatisticalAnalysis:
     """
@@ -99,4 +102,65 @@ class StatisticalOutlierDetection:
         left_outliers = zscores.index[zscores < -std_threshold].tolist()
 
         outliers_indices = left_outliers + right_outliers
+        return outliers_indices
+
+    def mahalanobis_distance(self, df):
+        """
+        Calculate Mahalanobis Distance for a Pandas DataFrame.
+
+        Parameters:
+        df (pandas.DataFrame): The input DataFrame containing the data points.
+
+        Returns:
+        distances (pandas.Series): A Series containing the Mahalanobis Distance for each data point.
+        """
+        # Convert the DataFrame to a NumPy array for efficient calculations
+        data = df.values
+
+        # Calculate the mean vector
+        mean = np.mean(data, axis=0)
+
+        # Calculate the covariance matrix
+        covariance_matrix = np.cov(data, rowvar=False)
+
+        # Calculate the inverse of the covariance matrix
+        inv_covariance_matrix = inv(covariance_matrix)
+
+        # Initialize an empty list to store the Mahalanobis Distances
+        distances = []
+
+        # Calculate the Mahalanobis Distance for each data point
+        for i in range(len(data)):
+            x_minus_mean = data[i] - mean
+            distance = np.sqrt(np.dot(np.dot(x_minus_mean, inv_covariance_matrix), x_minus_mean))
+            distances.append(distance)
+
+        # Convert the list of distances to a Pandas Series
+        distances = pd.Series(distances, index=df.index, name='MahalanobisDistance')
+
+        return distances
+
+    def mahalanobis_dist_outliers(self, df, mahalanobis_distances):
+        """
+        Chi-Square Percent Point Function (ppf) helps find a critical value that tells us how extreme or
+        unusual a result is in a Chi-Square distribution, often used in statistics.
+        It's like a threshold that helps decide if something is very different from what we'd expect by chance.
+        :param df: the dataframe used for mahalanobis distances.
+        :param mahalanobis_distances: the computed mahalanobis distances.
+        :return: outliers from the initial dataset
+        """
+
+        # Define the degrees of freedom (df) for the Chi-Square distribution
+        df_chi2 = df.shape[1]  # Equal to the number of features
+
+        # Specify the desired significance level (alpha)
+        alpha = 0.0001  # You can adjust this value based on your desired level of significance
+
+        # Calculate the Chi-Square critical value for the given significance level
+        chi2_critical_value = chi2.ppf(1 - alpha, df_chi2)
+
+        # Detect outliers based on the Mahalanobis Distance and Chi-Square critical value
+        outliers_indices = df.index[mahalanobis_distances > np.sqrt(chi2_critical_value)].tolist()
+        #df[mahalanobis_distances > np.sqrt(chi2_critical_value)]
+
         return outliers_indices
