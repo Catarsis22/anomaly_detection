@@ -9,27 +9,10 @@ https://www.kaggle.com/datasets/chitwanmanchanda/fraudulent-transactions-data/
     -neural network
 
 -audit
-    -assumptions about data: filled data (why did you fill with 0?)
-    -assumptions about final mode: why isolation forest? present entire research report by comparing explored models
+    -assumptions about data
+    -assumptions about final mode
     -explainable AI
 
 -business
     -how to present explainable: make a story with explainable features
     -create graphs from transactions to show an account
-
--presentation:
-    -slide about universe and galaxy
-    -slide about how the presentation can help you
-    -2 slides about ML: supervised vs unsupervised
-    -1 slide about what an anomaly/outlier is + frame of reference
-    -1 slide about scores, F1 and cofusion matrix
-    -1 slide for z score
-    -1 slide for mod
-    -1 slide for the clustering
-    -1 slide for isolation forest
-    -1 slide for autoencoder
-
-    -audit: 3 types (internal - focus on security/protocols/and alignment with others, independent, national)
-        -assumptions about data
-        -assumptions about model/and why the pick? (is IF making data assumptions, is AE making data assumptions)
-        -explainable?
